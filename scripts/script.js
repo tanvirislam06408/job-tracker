@@ -101,6 +101,8 @@ mainContainer.addEventListener('click', function (e) {
         
         if (!alreadyExist) {
             interviewJobsList.push(jobCardInfo);
+            console.log(interviewJobsList.length);
+            
         }
         
         
@@ -149,8 +151,11 @@ mainContainer.addEventListener('click', function (e) {
 })
 
 function rejectRender() {
+    const rejectLength=rejectCount.innerText;
+
     filterJobs.innerHTML = ""
-    for (list of rejectJobsList) {
+   if(rejectLength > 0){
+     for (list of rejectJobsList) {
         let div = document.createElement('div');
         div.innerHTML = `
         <div class="flex justify-between items-center">
@@ -177,10 +182,25 @@ function rejectRender() {
         div.classList.add('space-y-5', 'mt-4', 'shadow', 'p-6', 'rounded-lg', 'bg-white')
         filterJobs.appendChild(div);
     }
+   }
+   else{
+     let div = document.createElement('div');
+        div.innerHTML=`
+         <div class="space-y-2 mt-4 shadow p-6 rounded-lg bg-white flex flex-col justify-center items-center">
+          <img src="./img/jobs.png" alt="">
+           <h1 class="text-2xl font-semibold">No jobs available</h1>
+           <h4 class="text-[#64748B]">Check back soon for new job opportunities</h4>
+        </div>
+        `
+        filterJobs.appendChild(div);
+   }
 }
 function interviewJobs() {
+    const JobsLength=interviewCount.innerText;
+   
     filterJobs.innerHTML = ""
-    for (list of interviewJobsList) {
+    if(JobsLength > 0){
+        for (list of interviewJobsList) {
         let div = document.createElement('div');
         div.innerHTML = `
         <div class="flex justify-between items-center">
@@ -207,6 +227,19 @@ function interviewJobs() {
         div.classList.add('space-y-5', 'mt-4', 'shadow', 'p-6', 'rounded-lg', 'bg-white')
         filterJobs.appendChild(div);
     }
+    }
+    else{
+        let div = document.createElement('div');
+        div.innerHTML=`
+         <div class="space-y-2 mt-4 shadow p-6 rounded-lg bg-white flex flex-col justify-center items-center">
+          <img src="./img/jobs.png" alt="">
+           <h1 class="text-2xl font-semibold">No jobs available</h1>
+           <h4 class="text-[#64748B]">Check back soon for new job opportunities</h4>
+        </div>
+        `
+        filterJobs.appendChild(div);
+    }
 }
 
-
+calculateCount()
+console.log(interviewJobsList.length);
