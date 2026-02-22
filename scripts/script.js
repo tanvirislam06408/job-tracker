@@ -1,8 +1,12 @@
 let interviewJobsList = [];
 let rejectJobsList = [];
 let currentStatus='all'
+let allCardData=[];
+console.log(allCardData);
 
 
+const DeleteBtn=document.querySelectorAll('.deleteBtn');
+const allJobSection = document.getElementById('allJobs');
 
 let totalCount = document.getElementById('total');
 let interviewCount = document.getElementById('interview');
@@ -13,13 +17,12 @@ const allJobsCount = document.getElementById('allJobs');
 const jobsLeft = document.getElementById('jobsLeft');
 
 
-
 function calculateCount() {
     // total jobs count
     totalCount.innerText = allJobsCount.children.length;
     // interview Jobs count
     interviewCount.innerText = interviewJobsList.length;
-
+    
     // rejected jobs count
     rejectCount.innerText = rejectJobsList.length;
     jobsLeft.innerText = allJobsCount.children.length;
@@ -111,6 +114,8 @@ mainContainer.addEventListener('click', function (e) {
             rejectRender();
         }
         calculateCount();
+
+         jobsLeft.innerText=`${interviewCount.innerText} of ${totalCount.innerText}` ;
         
     }
 
@@ -147,7 +152,27 @@ mainContainer.addEventListener('click', function (e) {
             interviewJobs();
         }
         calculateCount();
+        jobsLeft.innerText=`${interviewCount.innerText} of ${totalCount.innerText}` ;
     }
+
+    // delegating for delete
+    else if(e.target.closest('.deleteBtn')){
+        console.log("clicked");
+        const parentDiv=e.target.parentNode.parentNode.parentNode;
+        const jobTitle = parentDiv.querySelector('.job_Title').innerText;
+
+        interviewJobsList=interviewJobsList.filter(item=> item.jobTitle != jobTitle);
+        rejectJobsList   = rejectJobsList.filter(j => j.jobTitle != jobTitle);
+        console.log(parentDiv);
+        allJobSection.removeChild(parentDiv);
+        calculateCount()
+        
+        
+    }
+
+
+
+
 })
 
 function rejectRender() {
