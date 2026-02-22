@@ -1,11 +1,8 @@
 let interviewJobsList = [];
 let rejectJobsList = [];
 let currentStatus = 'btn-all';
-let allCardData = [];
-console.log(allCardData);
 
 
-const DeleteBtn = document.querySelectorAll('.deleteBtn');
 const allJobSection = document.getElementById('allJobs');
 
 let totalCount = document.getElementById('total');
